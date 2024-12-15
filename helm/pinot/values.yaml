@@ -128,7 +128,7 @@ controller:
     accessMode: ReadWriteOnce
     size: 1G
     mountPath: /var/pinot/controller/data
-    storageClass: ""
+    storageClass: "gp2"
     extraVolumes: []
     extraVolumeMounts: []
 
@@ -414,7 +414,7 @@ server:
     accessMode: ReadWriteOnce
     size: 4G
     mountPath: /var/pinot/server/data
-    storageClass: ""
+    storageClass: "gp2"
     #storageClass: "ssd"
     extraVolumes: []
     extraVolumeMounts: []
@@ -542,7 +542,7 @@ minion:
     accessMode: ReadWriteOnce
     size: 4G
     mountPath: /var/pinot/minion/data
-    storageClass: ""
+    storageClass: "gp2"
     #storageClass: "ssd"
     extraVolumes: []
     extraVolumeMounts: []
@@ -654,7 +654,7 @@ minionStateless:
     accessMode: ReadWriteOnce
     size: 4G
     mountPath: /var/pinot/minion/data
-    storageClass: ""
+    storageClass: "gp2"
     #storageClass: "ssd"
     extraVolumes: []
     extraVolumeMounts: []
@@ -745,7 +745,7 @@ zookeeper:
   persistence:
     enabled: true
     ## The amount of PV storage allocated to each Zookeeper pod in the statefulset
-    # size: "2Gi"
+    size: "2Gi"
 
   ## Specify a Zookeeper imagePullPolicy
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
