@@ -608,7 +608,7 @@ minion:
 # Pinot Minion Stateless:
 # ------------------------------------------------------------------------------
 minionStateless:
-  enabled: true
+  enabled: false
   name: minion-stateless
   replicaCount: 1
   podSecurityContext: {}
