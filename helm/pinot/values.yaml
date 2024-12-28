@@ -90,7 +90,7 @@ pinotAuth:
 # ------------------------------------------------------------------------------
 controller:
   name: controller
-  replicaCount: 1
+  replicaCount: 2
   podManagementPolicy: Parallel
   podSecurityContext: {}
     # fsGroup: 2000
@@ -126,7 +126,7 @@ controller:
   persistence:
     enabled: true
     accessMode: ReadWriteOnce
-    size: 1G
+    size: 100G
     mountPath: /var/pinot/controller/data
     storageClass: "gp2"
     extraVolumes: []
@@ -189,13 +189,22 @@ controller:
 
   resources:
     requests:
-      memory: "1.25Gi"
+      memory: "12Gi"
+      cpu: "4"
+    limits:
+      memory: "16Gi"
+      cpu: "4"
 
-  nodeSelector: {}
-
-  tolerations: []
+  nodeSelector:
+    blinkit.in/node-type: blinkit-preprod-small-controller
 
   affinity: {}
+
+  tolerations:
+    - key: "blinkit.in/toleration"
+      operator: "Equal"
+      value: "pinotOnly"
+      effect: "NoSchedule"
 
   podAnnotations: {}
 
@@ -276,6 +285,12 @@ broker:
       periodSeconds: 10
 
   persistence:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 100G
+    mountPath: /var/pinot/broker/data
+    storageClass: "gp2"
+    #storageClass: "ssd"
     extraVolumes: []
     extraVolumeMounts: []
 
@@ -324,13 +339,22 @@ broker:
 
   resources:
     requests:
-      memory: "1.25Gi"
+      memory: "12Gi"
+      cpu: "4"
+    limits:
+      memory: "16Gi"
+      cpu: "4"
 
-  nodeSelector: {}
+  nodeSelector:
+    blinkit.in/node-type: blinkit-preprod-small-broker
 
   affinity: {}
 
-  tolerations: []
+  tolerations:
+    - key: "blinkit.in/toleration"
+      operator: "Equal"
+      value: "pinotOnly"
+      effect: "NoSchedule"
 
   podAnnotations: {}
 
@@ -412,7 +436,7 @@ server:
   persistence:
     enabled: true
     accessMode: ReadWriteOnce
-    size: 4G
+    size: 100G
     mountPath: /var/pinot/server/data
     storageClass: "gp2"
     #storageClass: "ssd"
@@ -450,13 +474,22 @@ server:
 
   resources:
     requests:
-      memory: "1.25Gi"
+      memory: "120Gi"
+      cpu: "16"
+    limits:
+      memory: "120Gi"
+      cpu: "16"
 
-  nodeSelector: {}
+  nodeSelector:
+    blinkit.in/node-type: blinkit-preprod-local-ssd-large-server
 
   affinity: {}
 
-  tolerations: []
+  tolerations:
+    - key: "blinkit.in/toleration"
+      operator: "Equal"
+      value: "pinotOnly"
+      effect: "NoSchedule"
 
   podAnnotations: {}
 
@@ -496,9 +529,9 @@ server:
 # Pinot Minion:
 # ------------------------------------------------------------------------------
 minion:
-  enabled: false
+  enabled: true
   name: minion
-  replicaCount: 0
+  replicaCount: 1
   podManagementPolicy: Parallel
   podSecurityContext: {}
     # fsGroup: 2000
@@ -540,7 +573,7 @@ minion:
   persistence:
     enabled: true
     accessMode: ReadWriteOnce
-    size: 4G
+    size: 100G
     mountPath: /var/pinot/minion/data
     storageClass: "gp2"
     #storageClass: "ssd"
@@ -565,13 +598,22 @@ minion:
 
   resources:
     requests:
-      memory: "1.25Gi"
+      memory: "12Gi"
+      cpu: "4"
+    limits:
+      memory: "16Gi"
+      cpu: "4"
 
-  nodeSelector: {}
+  nodeSelector:
+    startreedata.io/node-type: blinkit-preprod-xsmall-minion
 
   affinity: {}
 
-  tolerations: []
+  tolerations:
+    - key: "blinkit.in/toleration"
+      operator: "Equal"
+      value: "pinotOnly"
+      effect: "NoSchedule"
 
   podAnnotations: {}
 
@@ -723,7 +765,22 @@ zookeeper:
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
   resources:
     requests:
-      memory: "1.25Gi"
+      memory: "12Gi"
+      cpu: "4"
+    limits:
+      memory: "16Gi"
+      cpu: "4"
+
+  nodeSelector:
+    blinkit.in/node-type: blinkit-preprod-xsmall-zookeeper
+
+  affinity: {}
+
+  tolerations:
+    - key: "blinkit.in/toleration"
+      operator: "Equal"
+      value: "pinotOnly"
+      effect: "NoSchedule"
 
   ## Replicas
   replicaCount: 1
