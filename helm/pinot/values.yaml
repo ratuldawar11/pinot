@@ -189,11 +189,11 @@ controller:
 
   resources:
     requests:
-      memory: "12Gi"
-      cpu: "4"
+      memory: "6Gi"
+      cpu: "3"
     limits:
-      memory: "16Gi"
-      cpu: "4"
+      memory: "12Gi"
+      cpu: "3"
 
   nodeSelector:
     blinkit.in/node-type: blinkit-preprod-small-controller
@@ -339,11 +339,11 @@ broker:
 
   resources:
     requests:
-      memory: "12Gi"
-      cpu: "4"
+      memory: "6Gi"
+      cpu: "3"
     limits:
-      memory: "16Gi"
-      cpu: "4"
+      memory: "12Gi"
+      cpu: "3"
 
   nodeSelector:
     blinkit.in/node-type: blinkit-preprod-small-broker
@@ -474,11 +474,11 @@ server:
 
   resources:
     requests:
-      memory: "120Gi"
-      cpu: "16"
+      memory: "64Gi"
+      cpu: "8"
     limits:
-      memory: "120Gi"
-      cpu: "16"
+      memory: "110Gi"
+      cpu: "14"
 
   nodeSelector:
     blinkit.in/node-type: blinkit-preprod-local-ssd-large-server
@@ -598,11 +598,11 @@ minion:
 
   resources:
     requests:
-      memory: "12Gi"
-      cpu: "4"
+      memory: "6Gi"
+      cpu: "3"
     limits:
-      memory: "16Gi"
-      cpu: "4"
+      memory: "12Gi"
+      cpu: "3"
 
   nodeSelector:
     startreedata.io/node-type: blinkit-preprod-xsmall-minion
@@ -765,11 +765,11 @@ zookeeper:
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
   resources:
     requests:
-      memory: "12Gi"
-      cpu: "4"
+      memory: "6Gi"
+      cpu: "3"
     limits:
-      memory: "16Gi"
-      cpu: "4"
+      memory: "12Gi"
+      cpu: "3"
 
   nodeSelector:
     blinkit.in/node-type: blinkit-preprod-xsmall-zookeeper
